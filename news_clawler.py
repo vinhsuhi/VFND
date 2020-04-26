@@ -12,16 +12,16 @@ def get_data(path, destination):
             if len(link) < 10:
                 continue
             links_list.add(link)
-    outputs = NewsPlease.from_urls(links_list, timeout=6)
+    links_list = list(links_list)
     final_outputs = {}
     important_keys = ['authors', 'date_publish', 'description', 'image_url', 'language', 'title', 'maintext']
-    for key, value in tqdm(outputs.items()):
+    for key in tqdm(links_list):
+        value = NewsPlease.from_url(key, timeout=4)
         paper_data = {}
         for im_key in important_keys:
             paper_data[im_key] = value.__dict__[im_key]
         final_outputs[key] = paper_data
-
-    pickle.dump(open(destination, 'wb'), final_outputs)
+    pickle.dump(final_outputs, open(destination, 'wb'))
 
 if __name__ == "__main__":
     news_links_path = 'Dataset/news_links'
