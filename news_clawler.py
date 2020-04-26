@@ -32,4 +32,6 @@ if __name__ == "__main__":
 
     files = os.listdir(news_links_path)
 
-    get_data(news_links_path + '/' + files[0], destination=to_save_path + '/' + files[0][14:-4] + '.pkl')
+    for file in files:
+        print("Crawl for file: {}".format(file))
+        get_data(news_links_path + '/' + file, destination=to_save_path + '/' + file[14:-4] + '.pkl')
