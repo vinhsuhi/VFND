@@ -16,11 +16,11 @@ def get_data(path, destination):
     final_outputs = {}
     important_keys = ['authors', 'date_publish', 'description', 'image_url', 'language', 'title', 'maintext']
 
-    multiple_index = 20
+    multiple_index = 200
     for i in range(len(links_list)//multiple_index):
         keys = links_list[i * multiple_index : (i+1) * multiple_index]
         values = NewsPlease.from_urls(keys, timeout=6)
-        for key, value in values:
+        for key, value in values.items():
             paper_data = {}
             for im_key in important_keys:
                 paper_data[key] = value.__dict__[im_key]
