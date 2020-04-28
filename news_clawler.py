@@ -17,7 +17,7 @@ def get_data(path, destination):
     important_keys = ['authors', 'date_publish', 'description', 'image_url', 'language', 'title', 'maintext']
 
     multiple_index = 20
-    for i in range(len(links_list)//multiple_index):
+    for i in tqdm(range(len(links_list)//multiple_index)):
         keys = links_list[i * multiple_index : (i+1) * multiple_index]
         values = NewsPlease.from_urls(keys, timeout=6)
         for key, value in values:
@@ -38,9 +38,9 @@ def get_data(path, destination):
     # pickle.dump(final_outputs, open(destination, 'wb'))
 
 if __name__ == "__main__":
-    news_links_path = 'Dataset/news_links'
+    news_links_path = 'Dataset/news_links_old'
 
-    to_save_path = 'Dataset/raw_news'
+    to_save_path = 'Dataset/raw_news_old'
     if not os.path.exists(to_save_path):
         os.mkdir(to_save_path)
 
